@@ -18,15 +18,16 @@ class Multiplex {
     /// Binary encoding
     ///__________________________________
     ///|  1.  |  2.  |  3.  |    I/O    |
-    ///|  LOW |  LOW |  LOW | 1 active. |
-    ///| HIGH |  LOW |  LOW | 2 active. |
-    ///|  LOW | HIGH |  LOW | 3 active. |
-    ///| HIGH | HIGH |  LOW | 4 active. |
-    ///|  LOW |  LOW | HIGH | 5 active. |
-    ///| HIGH |  LOW | HIGH | 6 active. |
-    ///|  LOW | HIGH | HIGH | 7 active. |
-    ///| HIGH | HIGH | HIGH | 8 active. |
-    ///|________________________________|
+    ///|______|______|______|___________|
+    ///|  LOW |  LOW |  LOW | 0 active. |
+    ///| HIGH |  LOW |  LOW | 1 active. |
+    ///|  LOW | HIGH |  LOW | 2 active. |
+    ///| HIGH | HIGH |  LOW | 3 active. |
+    ///|  LOW |  LOW | HIGH | 4 active. |
+    ///| HIGH |  LOW | HIGH | 5 active. |
+    ///|  LOW | HIGH | HIGH | 6 active. |
+    ///| HIGH | HIGH | HIGH | 7 active. |
+    ///|______|______|______|___________|
 
     // Hard-coded pattern 
     int sw1_pattern[8] = {0, 1, 0, 1, 0, 1, 0, 1};
