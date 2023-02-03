@@ -1,6 +1,6 @@
 #include "core_pins.h"
 
-// io: microcontroller pin for input/output
+// io: microcontroller pin for input/output.\n
 // mode: 0 for input, 1 for output
 // sw1, sw2, sw3: pins for choosing which gate in multiplexer to read/write from
 // enable: turns the multiplexer on with a LOW or 0 signal.
