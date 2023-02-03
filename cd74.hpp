@@ -1,6 +1,11 @@
 #include "core_pins.h"
 
-// the Multiplex .read() function should be called after a small delay, letting the signal 
+// io: microcontroller pin for input/output
+// mode: 0 for input, 1 for output
+// sw1, sw2, sw3: pins for choosing which gate in multiplexer to read/write from
+// enable: turns the multiplexer on with a LOW or 0 signal.
+//
+// Multiplex .read() function should be called after a small delay, letting the signal 
 // stabilize while transmitted through the multiplexer.
 
 class Multiplex {
@@ -9,9 +14,24 @@ class Multiplex {
     int mode;
     int sw1, sw2, sw3;
     int enable;
-    int sw3_pattern[8] = {0, 0, 0, 0, 1, 1, 1, 1};
-    int sw2_pattern[8] = {0, 0, 1, 1, 0, 0, 1, 1};
+
+    /// Binary encoding
+    ///__________________________________
+    ///|  1.  |  2.  |  3.  |    I/O    |
+    ///|  LOW |  LOW |  LOW | 1 active. |
+    ///| HIGH |  LOW |  LOW | 2 active. |
+    ///|  LOW | HIGH |  LOW | 3 active. |
+    ///| HIGH | HIGH |  LOW | 4 active. |
+    ///|  LOW |  LOW | HIGH | 5 active. |
+    ///| HIGH |  LOW | HIGH | 6 active. |
+    ///|  LOW | HIGH | HIGH | 7 active. |
+    ///| HIGH | HIGH | HIGH | 8 active. |
+    ///|________________________________|
+
+    // Hard-coded pattern 
     int sw1_pattern[8] = {0, 1, 0, 1, 0, 1, 0, 1};
+    int sw2_pattern[8] = {0, 0, 1, 1, 0, 0, 1, 1};
+    int sw3_pattern[8] = {0, 0, 0, 0, 1, 1, 1, 1};
   
   public:
     Multiplex(int io, int mode, int sw1, int sw2, int sw3, int enable);
@@ -22,10 +42,3 @@ class Multiplex {
     int input_read();
 };
 
-/// Count binary
-///__________________________________
-///|  1.  |  2.  |  3.  |    I/O    |
-///|  LOW |  LOW |  LOW | 1 active. |
-///|  LOW |  LOW | HIGH | 2 active. |
-///|  LOW |  LOW | HIGH | 3 active. |
-///|________________________________|
